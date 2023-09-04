@@ -30,7 +30,6 @@ app.use(express.static("public"));
 //routes
 app.use('/',pageRoute);
 app.use('/courses', courseRoute);
-
 const port =3000;
 app.listen(port, ()=>{
     console.log(`App satrted on port ${port}`)

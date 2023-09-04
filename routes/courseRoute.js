@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require('express')
 const courseController = require('../controllers/courseController');
+const { models } = require('mongoose');
+const { route } = require('./pageRoute');
 
-const router =express.Router();
+const router = express.Router();
 
+router.route('/').post (courseController.createCourse);
 
-router.route('/').post(courseControlleer.createCourse);
-
-
-module.exports= router;
+module.exports = route;
