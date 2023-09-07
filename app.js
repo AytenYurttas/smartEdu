@@ -1,8 +1,9 @@
-const flash = require('connect-flash');
+
 const express = require ('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 
 const dotnev = require('dotenv').config();
 
@@ -38,7 +39,6 @@ global.userIN = null;
 //middlewares
 
 app.use(express.static("public"));
-app.use(flash());
 app.use(express.json()); // JSON verilerini işlemek için
 app.use(express.urlencoded({ extended: true })); // URL-encoded verileri işlemek için
 app.use(session({
@@ -48,7 +48,11 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: 'mongodb+srv://root:uTOsV4K59W5YZkYP@cluster0.1maa9qv.mongodb.net/?retryWrites=true&w=majority' })
 
 }));
-
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.flashMessages = req.flash();
+  next();
+})
 
 //routes
 app.use('*',(req,res,next)=> {
