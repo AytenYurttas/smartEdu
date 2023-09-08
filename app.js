@@ -49,29 +49,27 @@ app.use(session({
 
 }));
 app.use(flash());
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
   next();
-})
+});
 app.use(
-  methodOverride('_method',{
-  methods: ['POST','GET'],
-})
+  methodOverride('_method', {
+    methods: ['POST', 'GET'],
+  })
 );
 
-
-
-//routes
-app.use('*',(req,res,next)=> {
+//Routes
+app.use('*', (req, res, next) => {
   userIN = req.session.userID;
   next();
 });
-app.use('/',pageRoute);
+app.use('/', pageRoute);
 app.use('/courses', courseRoute);
 app.use('/categories', categoryRoute);
 app.use('/users', userRoute);
 
-const port =3000;
-app.listen(port, ()=>{
-    console.log(`App satrted on port ${port}`)
+const port = 3000;
+app.listen(port, () => {
+  console.log(`App started on port ${port}`);
 });
